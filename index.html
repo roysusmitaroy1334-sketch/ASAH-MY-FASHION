@@ -1,1 +1,91 @@
-404: Not Found
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mera 3D Webspace</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #050510;
+            font-family: 'Arial', sans-serif;
+        }
+        .ui-container {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            z-index: 100;
+            pointer-events: none;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00ffcc;
+        }
+        p {
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+    <!-- Three.js Library aur OrbitControls (Touch/Mouse se ghumane ke liye) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+    <div class="ui-container">
+        <h1>✨ MERA 3D WEBPAGE ✨</h1>
+        <p>Screen par touch karke is dabbe ko har taraf ghumao!</p>
+    </div>
+
+    <script>
+        // 1. Scene, Camera aur Renderer setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 01, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // 2. 3D Cube (Dabba) ki geometry aur neon-style wireframe material
+        const geometry = new THREE.BoxGeometry(2, 2, 2);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0x00ffcc, 
+            wireframe: true 
+        });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        // 3. Orbit Controls taaki user touch/mouse se interact kar sake
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
+        // 4. Animation Loop (Isse dabba lagatar ghumta rahega)
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Halki automatic rotation
+            cube.rotation.x += 0.005;
+            cube.rotation.y += 0.005;
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // 5. Mobile screen rotate karne par website sahi dikhe
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
