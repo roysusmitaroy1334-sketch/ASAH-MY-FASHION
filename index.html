@@ -3,89 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mera 3D Webspace</title>
+    <title>Asah My Fashion | Define Your Signature Style</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        /* Global Reset */
+        * {
             margin: 0;
-            overflow: hidden;
-            background-color: #050510;
-            font-family: 'Arial', sans-serif;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .ui-container {
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7faf8;
+            color: #2c3e35;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
             position: absolute;
-            top: 20px;
+            top: 0;
+            left: 0;
             width: 100%;
+            padding: 25px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        .brand-logo {
+            font-size: 24px;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 5px;
+            border-bottom: 2px solid #ffffff;
+            padding-bottom: 2px;
+        }
+        .top-cart {
+            position: relative;
+            cursor: pointer;
+            color: #ffffff;
+        }
+        .store-icon-svg {
+            width: 28px;
+            height: 28px;
+            fill: #ffffff;
+        }
+
+        /* Custom Hero Section with Tilted Clothes Concept */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            /* Premium Sage Green Gradient Base */
+            background: linear-gradient(135deg, rgba(62, 95, 81, 0.85) 0%, rgba(44, 69, 58, 0.9) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            color: white;
-            z-index: 100;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Geometric Abstract Design on Extreme Right */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            right: -10%;
+            top: -10%;
+            width: 40%;
+            height: 120%;
+            background: rgba(255, 255, 255, 0.03);
+            transform: rotate(15deg);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
             pointer-events: none;
         }
-        h1 {
-            margin: 0;
-            font-size: 28px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px #00ffcc;
+
+        /* Background Graphics for Tilted Shirt & Dress */
+        .bg-graphic-left {
+            position: absolute;
+            left: -5%;
+            bottom: 10%;
+            width: 40%;
+            max-width: 350px;
+            opacity: 0.25;
+            transform: rotate(-15deg); /* Tilted Left as requested */
+            pointer-events: none;
         }
-        p {
-            color: #888;
+        .bg-graphic-right {
+            position: absolute;
+            right: 15%;
+            bottom: 5%;
+            width: 35%;
+            max-width: 320px;
+            opacity: 0.25;
+            transform: rotate(12deg); /* Tilted Right as requested */
+            pointer-events: none;
+        }
+
+        /* Middle Content Texts */
+        .hero-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            max-width: 400px;
+            z-index: 2;
+        }
+        .hero-section p {
             font-size: 14px;
+            color: #e2ede8;
+            line-height: 1.6;
+            max-width: 350px;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        /* Category Filter Buttons */
+        .category-btns {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            max-width: 340px;
+            z-index: 2;
+        }
+        .btn-cat {
+            flex: 1;
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .btn-cat.active, .btn-cat:hover {
+            background-color: #ffffff;
+            color: #1e332a;
+        }
+
+        /* Products Display Grid */
+        .shop-section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #eef5f1;
+        }
+        .shop-section h2 {
+            font-size: 26px;
+            color: #1a3a2b;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: #ffffff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+            text-align: left;
+            display: block;
+        }
+        .product-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+        .product-details {
+            padding: 20px;
+        }
+        .product-title {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .product-price {
+            font-size: 18px;
+            color: #2c453a;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        /* WhatsApp Order Button */
+        .btn-whatsapp {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            transition: 0.3s;
+        }
+        .btn-whatsapp:hover {
+            background-color: #1ebd58;
+        }
+
+        /* Premium Badges Info Section */
+        .badge-section {
+            background: #ffffff;
+            padding: 40px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            border-top: 1px solid #e2ede8;
+        }
+        .badge-item {
+            text-align: center;
+            max-width: 200px;
+        }
+        .badge-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .badge-item h4 {
+            font-size: 14px;
+            color: #1a3a2b;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .badge-item p {
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a3a2b;
+            color: #a3bfae;
+            text-align: center;
+            padding: 25px;
+            font-size: 12px;
+            letter-spacing: 1px;
         }
     </style>
-    <!-- Three.js Library aur OrbitControls (Touch/Mouse se ghumane ke liye) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
 
-    <div class="ui-container">
-        <h1>✨ MERA 3D WEBPAGE ✨</h1>
-        <p>Screen par touch karke is dabbe ko har taraf ghumao!</p>
-    </div>
+    <!-- Top Navbar -->
+    <header>
+        <div class="brand-logo">FASHION</div>
+        <div class="top-cart">
+            <svg class="store-icon-svg" viewBox="0 0 24 24">
+                <path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/>
+            </svg>
+        </div>
+    </header>
 
+    <!-- Main Hero Banner Section -->
+    <section class="hero-section">
+        <!-- Blue Tilted Shirt Graphic Placeholder on Left -->
+        <img class="bg-graphic-left" src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=500" alt="Blue Shirt Graphic">
+        
+        <!-- Elegant Premium Dress Graphic Placeholder on Right -->
+        <img class="bg-graphic-right" src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=500" alt="Premium Dress Graphic">
+
+        <!-- Core Texts (Option 3 applied) -->
+        <h1>Define Your Signature Style</h1>
+        <p>Step into luxury with our exclusive premium wear collection. Crafted with love, designed for you.</p>
+        
+        <!-- Category Toggles -->
+        <div class="category-btns">
+            <button class="btn-cat active" id="men-btn" onclick="showCategory('men')">Shop Men</button>
+            <button class="btn-cat" id="women-btn" onclick="showCategory('women')">Shop Women</button>
+        </div>
+    </section>
+
+    <!-- Products Collection Section -->
+    <section class="shop-section" id="shop-catalog">
+        <h2 id="catalog-title">Men's Premium Collection</h2>
+        
+        <div class="product-grid">
+            <!-- Men Products -->
+            <div class="product-card item-men">
+                <img class="product-img" src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=500" alt="Product">
+                <div class="product-details">
+                    <div class="product-title">Premium Blue Casual Shirt</div>
+                    <div class="product-price">₹1,499</div>
+                    <a href="https://wa.me/919999999999?text=Hi,%20I%20want%20to%20order%20Premium%20Blue%20Casual%20Shirt" target="_blank" class="btn-whatsapp">🛍️ Order on WhatsApp</a>
+                </div>
+            </div>
+            <div class="product-card item-men">
+                <img class="product-img" src="https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=500" alt="Product">
+                <div class="product-details">
+                    <div class="product-title">Luxury Slim-Fit Blazer</div>
+                    <div class="product-price">₹3,499</div>
+                    <a href="https://wa.me/919999999999?text=Hi,%20I%20want%20to%20order%20Luxury%20Slim-Fit%20Blazer" target="_blank" class="btn-whatsapp">🛍️ Order on WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Women Products (Hidden Initially) -->
+            <div class="product-card item-women" style="display: none;">
+                <img class="product-img" src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=500" alt="Product">
+                <div class="product-details">
+                    <div class="product-title">Elegant Rust Summer Dress</div>
+                    <div class="product-price">₹1,899</div>
+                    <a href="https://wa.me/919999999999?text=Hi,%20I%20want%20to%20order%20Elegant%20Rust%20Summer%20Dress" target="_blank" class="btn-whatsapp">🛍️ Order on WhatsApp</a>
+                </div>
+            </div>
+            <div class="product-card item-women" style="display: none;">
+                <img class="product-img" src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=500" alt="Product">
+                <div class="product-details">
+                    <div class="product-title">Classic Linen Tunic</div>
+                    <div class="product-price">₹1,450</div>
+                    <a href="https://wa.me/919999999999?text=Hi,%20I%20want%20to%20order%20Classic%20Linen%20Tunic" target="_blank" class="btn-whatsapp">🛍️ Order on WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges Section -->
+    <section class="badge-section">
+        <div class="badge-item">
+            <div class="badge-icon">🌟</div>
+            <h4>Premium Fabric</h4>
+            <p>100% Handpicked high-quality material</p>
+        </div>
+        <div class="badge-item">
+            <div class="badge-icon">🚚</div>
+            <h4>Fast Delivery</h4>
+            <p>Quick & safe delivery at your door steps</p>
+        </div>
+        <div class="badge-item">
+            <div class="badge-icon">💬</div>
+            <h4>Direct Support</h4>
+            <p>Chat with us anytime via WhatsApp</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 ASAH MY FASHION. Designed for Pure Elegance.
+    </footer>
+
+    <!-- Filter Script Logic -->
     <script>
-        // 1. Scene, Camera aur Renderer setup
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 01, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        function showCategory(type) {
+            const menItems = document.querySelectorAll('.item-men');
+            const womenItems = document.querySelectorAll('.item-women');
+            const menBtn = document.getElementById('men-btn');
+            const womenBtn = document.getElementById('women-btn');
+            const title = document.getElementById('catalog-title');
 
-        // 2. 3D Cube (Dabba) ki geometry aur neon-style wireframe material
-        const geometry = new THREE.BoxGeometry(2, 2, 2);
-        const material = new THREE.MeshBasicMaterial({ 
-            color: 0x00ffcc, 
-            wireframe: true 
-        });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-
-        camera.position.z = 5;
-
-        // 3. Orbit Controls taaki user touch/mouse se interact kar sake
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-
-        // 4. Animation Loop (Isse dabba lagatar ghumta rahega)
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Halki automatic rotation
-            cube.rotation.x += 0.005;
-            cube.rotation.y += 0.005;
-
-            controls.update();
-            renderer.render(scene, camera);
+            if (type === 'men') {
+                menItems.forEach(el => el.style.display = 'block');
+                womenItems.forEach(el => el.style.display = 'none');
+                menBtn.classList.add('active');
+                womenBtn.classList.remove('active');
+                title.innerText = "Men's Premium Collection";
+            } else {
+                menItems.forEach(el => el.style.display = 'none');
+                womenItems.forEach(el => el.style.display = 'block');
+                menBtn.classList.remove('active');
+                womenBtn.classList.add('active');
+                title.innerText = "Women's Elegant Collection";
+            }
         }
-
-        // 5. Mobile screen rotate karne par website sahi dikhe
-        window.addEventListener('resize', onWindowResize, false);
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-
-        animate();
     </script>
 </body>
 </html>
